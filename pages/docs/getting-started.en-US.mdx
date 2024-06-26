@@ -69,8 +69,8 @@ function useUser (id) {
 
   return {
     user: data,
+    error
     isLoading,
-    isError: error
   }
 }
 ```
@@ -79,10 +79,10 @@ And use it in your components:
 
 ```jsx
 function Avatar ({ id }) {
-  const { user, isLoading, isError } = useUser(id)
+  const { user, error, isLoading } = useUser(id)
 
+  if (error) return <Error />
   if (isLoading) return <Spinner />
-  if (isError) return <Error />
   return <img src={user.avatar} />
 }
 ```
